@@ -86,7 +86,7 @@ namespace SevenMod.Plugin.Advertisements
             this.timer.Elapsed += this.OnTimerElapsed;
             this.timer.Start();
 
-            this.interval.ConVar.ValueChanged += this.OnIntervalConVarChanged;
+            this.interval.ConVar.ValueChanged += this.OnIntervalChanged;
         }
 
         /// <inheritdoc/>
@@ -101,7 +101,7 @@ namespace SevenMod.Plugin.Advertisements
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A <see cref="ConVarChangedEventArgs"/> object containing the event data.</param>
-        private void OnIntervalConVarChanged(object sender, ConVarChangedEventArgs e)
+        private void OnIntervalChanged(object sender, ConVarChangedEventArgs e)
         {
             this.timer.Interval = this.interval.AsInt * 60000;
         }
