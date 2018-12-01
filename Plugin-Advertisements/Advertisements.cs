@@ -69,10 +69,8 @@ namespace SevenMod.Plugin.Advertisements
         };
 
         /// <inheritdoc/>
-        public override void LoadPlugin()
+        public override void OnLoadPlugin()
         {
-            base.LoadPlugin();
-
             this.interval = this.CreateConVar("AdvertInterval", "120", "The time in seconds between advertisements.", true, 1).Value;
             this.randomOrder = this.CreateConVar("AdvertRandomOrder", "false", "Whether to show advertisements in random order.").Value;
 
@@ -80,17 +78,15 @@ namespace SevenMod.Plugin.Advertisements
         }
 
         /// <inheritdoc/>
-        public override void ConfigsExecuted()
+        public override void OnConfigsExecuted()
         {
-            base.ConfigsExecuted();
-
             this.LoadMessages();
 
             this.timer = new Timer(this.interval.AsInt * 60000);
             this.timer.Elapsed += this.OnTimerElapsed;
             this.timer.Start();
 
-            this.interval.ConVar.ConVarChanged += this.OnIntervalConVarChanged;
+            this.interval.ConVar.ValueChanged += this.OnIntervalConVarChanged;
         }
 
         /// <inheritdoc/>
