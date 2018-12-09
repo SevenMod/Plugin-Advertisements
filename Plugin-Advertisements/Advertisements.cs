@@ -9,7 +9,6 @@ namespace SevenMod.Plugin.Advertisements
     using System.Collections.Generic;
     using System.IO;
     using System.Timers;
-    using SevenMod.Chat;
     using SevenMod.ConVar;
     using SevenMod.Core;
 
@@ -195,7 +194,7 @@ namespace SevenMod.Plugin.Advertisements
                 this.index = (this.index + 1) % this.messages.Count;
             }
 
-            ChatHelper.SendToAll(message, "AD");
+            this.PrintToChatAll(message, "AD");
         }
     }
 }
