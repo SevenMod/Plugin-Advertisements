@@ -8,6 +8,7 @@ namespace SevenMod.Plugin.Advertisements
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Security.Permissions;
     using System.Timers;
     using SevenMod.ConVar;
     using SevenMod.Core;
@@ -15,6 +16,7 @@ namespace SevenMod.Plugin.Advertisements
     /// <summary>
     /// Plugin that periodically shows messages in chat.
     /// </summary>
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public sealed class Advertisements : PluginAbstract, IDisposable
     {
         /// <summary>
