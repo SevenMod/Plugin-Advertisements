@@ -196,7 +196,7 @@ namespace SevenMod.Plugin.Advertisements
                 this.index = (this.index + 1) % this.messages.Count;
             }
 
-            this.PrintToChatAll(message, "AD");
+            this.PrintToChatAll(message);
         }
     }
 }
