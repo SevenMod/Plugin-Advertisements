@@ -10,6 +10,7 @@ namespace SevenMod.Plugin.Advertisements
     using System.IO;
     using System.Security.Permissions;
     using System.Timers;
+    using SevenMod.Chat;
     using SevenMod.ConVar;
     using SevenMod.Core;
 
@@ -131,7 +132,7 @@ namespace SevenMod.Plugin.Advertisements
                         continue;
                     }
 
-                    this.messages.Add(line);
+                    this.messages.Add(Colors.ParseColors(line));
                 }
             }
 
