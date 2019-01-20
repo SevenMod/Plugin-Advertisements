@@ -9,6 +9,7 @@ namespace SevenMod.Plugin.Advertisements
     using System.Collections.Generic;
     using System.IO;
     using System.Security.Permissions;
+    using System.Text.RegularExpressions;
     using System.Timers;
     using SevenMod.Chat;
     using SevenMod.ConVar;
@@ -24,6 +25,17 @@ namespace SevenMod.Plugin.Advertisements
         /// The path to the messages list.
         /// </summary>
         private static readonly string ListPath = $"{SMPath.Config}AdvertisementsList.txt";
+
+        /// <summary>
+        /// The map of dynamic string replacements.
+        /// </summary>
+        private static readonly Dictionary<string, Func<string>> Replacements = new Dictionary<string, Func<string>>
+        {
+            { "GAME_NAME", () => GamePrefs.GetString(EnumGamePrefs.GameName) },
+            { "SERVER_NAME", () => GamePrefs.GetString(EnumGamePrefs.ServerName) },
+            { "SERVER_WEBSITE", () => GamePrefs.GetString(EnumGamePrefs.ServerWebsiteURL) },
+            { "WORLD_DAY", () => GameUtils.WorldTimeToDays(GameManager.Instance.World.GetWorldTime()).ToString() },
+        };
 
         /// <summary>
         /// The value of the AdvertInterval <see cref="ConVar"/>.
@@ -96,6 +108,20 @@ namespace SevenMod.Plugin.Advertisements
         {
             ((IDisposable)this.timer).Dispose();
             ((IDisposable)this.watcher).Dispose();
+        }
+
+        /// <summary>
+        /// Replaces all variable placeholders with their actual current value.
+        /// </summary>
+        /// <param name="message">The raw message string.</param>
+        /// <returns>The message string with all variable placeholders replaced with their actual current value.</returns>
+        private static string ReplaceVariables(string message)
+        {
+            return Regex.Replace(message, @"\{([a-zA-Z][a-zA-Z0-9_]*)\}", (Match m) =>
+            {
+                var key = m.Groups[1].Value.ToUpper();
+                return Replacements.ContainsKey(key) ? Replacements[key]() : m.Value;
+            });
         }
 
         /// <summary>
@@ -197,7 +223,7 @@ namespace SevenMod.Plugin.Advertisements
                 this.index = (this.index + 1) % this.messages.Count;
             }
 
-            this.PrintToChatAll(message);
+            this.PrintToChatAll("{0:s}", ReplaceVariables(message));
         }
     }
 }
