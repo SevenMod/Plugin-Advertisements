@@ -190,7 +190,9 @@ namespace SevenMod.Plugin.Advertisements
         {
             var file = File.CreateText(ListPath);
             file.WriteLine("// List your advertisement messages in this file.");
+            file.WriteLine("// You can use these variables: {SERVER_NAME}, {SERVER_WEBSITE}, {GAME_NAME}, {WORLD_DAY}.");
             file.WriteLine();
+            file.WriteLine("Welcome to [b]{SERVER_NAME}[/b]!");
             file.WriteLine("This server is running [b]SevenMod[/b]");
             file.Close();
         }
