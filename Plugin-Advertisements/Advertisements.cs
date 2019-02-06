@@ -164,8 +164,10 @@ namespace SevenMod.Plugin.Advertisements
 
             if (this.watcher == null)
             {
-                this.watcher = new FileSystemWatcher(Path.GetDirectoryName(ListPath), Path.GetFileName(ListPath));
-                this.watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite;
+                this.watcher = new FileSystemWatcher(Path.GetDirectoryName(ListPath), Path.GetFileName(ListPath))
+                {
+                    NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite,
+                };
                 this.watcher.Changed += this.OnListFileChanged;
                 this.watcher.Deleted += this.OnListFileChanged;
                 this.watcher.Renamed += this.OnListFileChanged;
