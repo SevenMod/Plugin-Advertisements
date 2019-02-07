@@ -78,7 +78,7 @@ namespace SevenMod.Plugin.Advertisements
             Name = "Advertisements",
             Author = "SevenMod",
             Description = "Periodically shows messages in chat.",
-            Version = "0.1.0.0",
+            Version = "0.1.0",
             Website = "https://github.com/SevenMod/Plugin-Advertisements"
         };
 
