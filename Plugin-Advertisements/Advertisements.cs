@@ -86,7 +86,7 @@ namespace SevenMod.Plugin.Advertisements
         public override void OnLoadPlugin()
         {
             this.interval = this.CreateConVar("AdvertInterval", "20", "The time in minutes between advertisements.", true, 1).Value;
-            this.randomOrder = this.CreateConVar("AdvertRandomOrder", "false", "Whether to show advertisements in random order.").Value;
+            this.randomOrder = this.CreateConVar("AdvertRandomOrder", "False", "Whether to show advertisements in random order.").Value;
 
             this.AutoExecConfig(true, "Advertisements");
         }
