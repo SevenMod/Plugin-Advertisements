@@ -1,6 +1,15 @@
 # Advertisements
 
-Plugin for SevenMod that periodically shows messages in chat.
+Plugin for SevenMod that periodically shows messages in chat. This plugin is in early development and is not ready for use in a live environment.
+
+## Configuration
+
+File: **Advertisements.xml**
+
+| Property            | Default | Description                                    |
+| ------------------- | ------- | ---------------------------------------------- |
+| `AdvertInterval`    | `20`    | The time in minutes between advertisements     |
+| `AdvertRandomOrder` | `False` | Whether to show advertisements in random order |
 
 ## License
 
